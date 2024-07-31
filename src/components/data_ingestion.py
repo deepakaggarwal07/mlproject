@@ -10,6 +10,8 @@ from exception import CustomException
 from logger import logging
 from components.data_transformation import DataTransformation
 from components.data_transformation import DataTransformationConfirg
+from components.model_trainer import modelTrainerConfig
+from components.model_trainer import ModelTrainer
 
 @dataclass
 class DataIngestionConfirg:
@@ -51,5 +53,10 @@ if __name__=="__main__":
     train_data,test_data= obj.initiate_data_ingestion()
 
     data_transformation=DataTransformation()
-    data_transformation.initiate_data_transformation(train_data,test_data)
+    train_arr,test_arr,_=data_transformation.initiate_data_transformation(train_data,test_data)
+
+
+    modelTrainer= ModelTrainer()
+    predictedScore=modelTrainer.inititate_model_trainer(train_arr,test_arr)
+    print(predictedScore)
         
